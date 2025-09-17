@@ -21,6 +21,8 @@ const Login = () => {
 
     try {
       dispatch(loginAction({ email, password }) as any).then((res: any) => {
+        console.log("sdfdsfdsfsdfdsfdsfds");
+        
         navigate("/app/dashboard"); // Navigate to the app after successful login
       }); // Dispatch the login action
     } catch (error) {

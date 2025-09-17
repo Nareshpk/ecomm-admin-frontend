@@ -10,6 +10,8 @@ import Slide from "@mui/material/Slide";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import type { TransitionProps } from "@mui/material/transitions";
+import { useDispatch } from "react-redux";
+import { addCategoryAction } from "../redux/actions/categoryAction";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -26,6 +28,7 @@ interface AddNewCategoryProps {
 }
 
 const AddNewCategory = ({ handleClose, open }: AddNewCategoryProps) => {
+  const dispatch = useDispatch();
   const [categoryName, setCategoryName] = useState("");
   const [image, setImage] = useState<File | null>(null);
 
@@ -36,6 +39,18 @@ const AddNewCategory = ({ handleClose, open }: AddNewCategoryProps) => {
   };
 
   const handleSubmit = () => {
+    const data:any ={
+      catName:categoryName
+    }
+     try {
+          dispatch(addCategoryAction(data) as any).then((res: any) => {
+            console.log("sdfdsfdsfsdfdsfdsfds",res);
+            
+          }); // Dispatch the login action
+        } catch (error) {
+          console.error("Error during login:", error);
+          alert("An error occurred. Please try again.");
+        }
     console.log("Category Name:", categoryName);
     console.log("Uploaded Image:", image);
     handleClose();
